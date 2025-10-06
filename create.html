@@ -1,0 +1,139 @@
+<STYle>
+    .create{
+        margin: 100px auto;
+    background-color: #ffffff;
+    padding: 30px;
+    width: 350px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4)
+    }
+    .inp{
+        display: block;
+    width: 100%;
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #1e1e1e;
+    border: none;
+    color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    font-size: 16px;
+    }
+    h1{
+        
+        text-align: center;
+        margin-top: 60px;
+        color: black;
+    }
+    .add{
+        margin-top: 20px;
+    width: 100%;
+    padding: 12px;
+    background-color: #5dade2;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    }
+    .add:hover {
+    background-color: #3498db;
+  }
+  body {
+    font-family: Arial, sans-serif;
+    background-color: white;
+    margin: 0;
+    padding: 0;
+  }
+  a {
+    margin: 20px;
+    display: inline-block;
+    text-decoration: none;
+    color: #3498db;
+    font-weight: bold;
+  }
+  .toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #28a745; /* green */
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  font-size: 14px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  z-index: 9999;
+}
+.toast.show {
+  opacity: 1;
+  visibility: visible;
+}
+.desc {
+  height: 120px;        /* make it taller */
+  resize: vertical;     /* allow user to resize vertically */
+  font-family: Arial, sans-serif;
+  line-height: 1.4;
+}
+
+</STYle>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CREATE_PRODUCT</title>
+</head>
+<body>
+    <a href="product_store.html">Home</a>
+    <h1 >Create New Product</h1>
+    <div class="create">
+        <input type="text" placeholder="Product Name" class="inp">
+        <input type="text" placeholder="Price" class="inp">
+        <input type="text" placeholder="Image URL" class="inp">
+        <textarea placeholder="Description" class="inp desc"></textarea>
+
+        <button class="add">Add Product</button>
+
+    </div>
+    <div id="toast" class="toast">Product added successfully!</div>
+    
+<script>
+    const addBtn = document.querySelector('.add');
+    // Load existing products or initialize empty array
+    const products = JSON.parse(localStorage.getItem('products')) || [];
+    
+    function showToast(message) {
+  const toast = document.getElementById('toast');
+  toast.textContent = message;
+  toast.classList.add('show');
+
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, 3000); // 3 seconds
+}
+
+    addBtn.addEventListener('click', () => {
+    const inputs = document.querySelectorAll('.inp');
+    const product = {
+    name: inputs[0].value.trim(),
+    price: inputs[1].value.trim(),
+    image: inputs[2].value.trim(),
+    info: document.querySelector('.desc').value.trim()
+    };
+    products.push(product)
+    localStorage.setItem('products', JSON.stringify(products));
+    showToast('Product added successfully!');
+    });
+
+
+</script>
+
+</body>
+</html>

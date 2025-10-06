@@ -1,0 +1,592 @@
+<style>
+    .head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px;
+    position: relative;
+}
+
+.title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: -30px;
+}
+.create, .mode,.cart {
+    border-radius: 50px;
+    height: 50px;
+    border: none;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+    margin-left: 10px;
+}
+
+.create {
+    background-color: aqua;
+}
+
+.mode {
+    background-color: yellow;
+}
+.cart {
+    background-color: rgb(173, 26, 26);
+}
+.clear{
+  background-color: green;
+  border: none;
+  border-radius: 70px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+
+}
+    
+    .but{
+        background-color: red;
+        border: none;
+        border-radius: 30px;
+    }
+    .buy{
+        background-color:blue;
+        border: none;
+        width: 50px;
+        border-radius: 100px;
+    }
+    .items{
+        display:flex;
+        padding: 30px;
+        flex-wrap: wrap; /* Optional: wrap to next line if needed */
+        gap: 20px; 
+    }
+    .item {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    width: 200px;
+    text-align: center;
+    background-color: #f9f9f9;
+}
+
+.update{
+    background-color: rgb(15, 216, 15);
+    border: none;
+    border-radius: 30px;
+}
+.popup {
+      position: fixed;
+      top: 25%;
+      left: 35%;
+      background: white;
+      padding: 20px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+      border-radius: 10px;
+      display: none;
+      z-index: 10;
+    }
+    .popup input {
+      display: block;
+      margin-bottom: 10px;
+      padding: 5px;
+      width: 100%;
+    }
+    .popup button {
+      margin-right: 10px;
+      padding: 5px 10px;
+      border-radius: 5px;
+      border: none;
+    }
+    .overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: none;
+      z-index: 5;}
+      .message{
+        text-align: center;
+      }
+      .delete{
+        border: none;
+        width: 80px;
+        height: 40px;
+        background-color: rgb(182, 35, 35);
+        border-radius: 20px;
+        font-size:small;
+        transition:ease;
+
+      }
+      .delete:hover,
+.but:hover,
+.buy:hover,
+.update:hover,
+.create:hover,
+.mode:hover,
+.cart :hover{
+    box-shadow: 0 0 15px rgba(0, 0, 0, 1);
+}
+      .search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;              /* space between elements */
+  margin: 20px auto;
+  flex-wrap: wrap;        /* wrap on small screens */
+}
+
+.search-bar input[type="text"] {
+  padding: 10px;
+  width: 250px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+.checkboxes {
+  display: block;
+  align-items: center;
+  gap: 10px;
+}
+
+.checkboxes label {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+.sort-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.sort-menu {
+  display: none; /* hidden by default */
+  position: absolute;
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  z-index: 100;
+}
+.fly-img {
+    position: absolute;
+    width: 100px; /* match the product image */
+    height: auto;
+    pointer-events: none; /* so it doesn't block clicks */
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s;
+    z-index: 1000;
+}
+body {
+  background-image: none
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+html, body {
+  height: 100%;   /* fill the viewport */
+  margin: 0;      /* remove default margins */
+  padding: 0;
+}
+.rating {
+  margin: 5px 0;
+}
+.star {
+  font-size: 20px;
+  cursor: pointer;
+  color: red;
+  transition: transform 0.2s ease;
+}
+.star:hover {
+  transform: scale(1.2);
+}
+
+    
+
+  
+</style>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>product store</title>
+</head>
+<body>
+
+
+<div class="head">
+  <div></div>
+  <h2 class="title">PRODUCT STORE</h2>
+  <div>
+    <button class="create">create</button>
+    <button class="mode" onclick="Mode()">Mode</button>
+    <button class="cart">cart:<span class="count">0</span></button>
+    <button class="clear" id="clear" onclick="cl()">clear</button>
+
+
+  </div>
+</div>
+
+<!-- Search bar BELOW header -->
+<div class="search-bar">
+  <input 
+    type="text" 
+    id="searchprice" 
+    placeholder="Search by price">
+  
+  <div class="checkboxes">
+    <label><input type="checkbox" id="checkhigh"> Higher</label>
+    <label><input type="checkbox" id="checklow"> Lower</label>
+  </div>
+
+  <input 
+    type="text" 
+    id="search" 
+    placeholder="Search products...">
+</div>
+<div class="sort-dropdown">
+  <button id="sortToggle">Sort Options ⬇</button>
+  <div id="sortMenu" class="sort-menu">
+    <label><input type="checkbox" id="alpha"> Abc</label><br>
+    <label><input type="checkbox" id="sortH"> Price ↑</label><br>
+    <label><input type="checkbox" id="sortL"> Price ↓</label>
+  </div>
+</div>
+
+<!-- ✅ Products container (missing before) -->
+<div class="items" id="items"></div>
+
+<!-- Popup for updating -->
+<div class="popup" id="popup">
+  <h3>Update Product</h3>
+  <input type="text" id="edit-name" placeholder="Product Name">
+  <input type="text" id="edit-price" placeholder="Price">
+  <input type="text" id="edit-image" placeholder="Image URL">
+  <button id="save-update">Save</button>
+  <button id="cancel-update">Cancel</button>
+</div>
+
+<div class="overlay" id="overlay"></div>
+    
+<script>
+  const high=document.getElementById('checkhigh')
+  const low=document.getElementById('checklow')
+  const alpha=document.getElementById('alpha')
+  const sorth=document.getElementById('sortH')
+  const sortl=document.getElementById('sortL')
+  const sortToggle = document.getElementById("sortToggle");
+const sortMenu = document.getElementById("sortMenu");
+const count=document.querySelector('.count')
+const cart=document.querySelector('.cart')
+const clear=document.getElementById('clear')
+
+
+    const items = document.getElementById('items');
+  const overlay = document.getElementById('overlay');
+  const popup = document.getElementById('popup');
+  const editName = document.getElementById('edit-name');
+  const editPrice = document.getElementById('edit-price');
+  const editImage = document.getElementById('edit-image');
+  const saveBtn = document.getElementById('save-update');
+  const cancelBtn = document.getElementById('cancel-update');
+  const header=document.querySelector('h2')
+  const body=document.querySelector('body')
+  const searchInput = document.getElementById('search');
+  const searchprice=document.getElementById('searchprice')
+  let white ='white'
+  let black ='black'
+
+  let products = JSON.parse(localStorage.getItem('products')) || [];
+  let tempproducts = JSON.parse(localStorage.getItem('tempproducts')) || [];
+
+  let editingIndex = null;
+  let originalProducts = [...products]; 
+  let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+
+
+  function renderProducts(filter = "", val = 0) {
+  const oldDeleteBtn = document.getElementById('delete-all');
+  if (oldDeleteBtn) oldDeleteBtn.remove();
+
+  items.innerHTML = '';
+
+  // Filter products by name
+  const filteredProducts = products.filter(product =>
+    product.name.toLowerCase().includes(filter.toLowerCase())
+  );
+
+  // Filter products by price
+  let pricedProducts = products;
+  if (high.checked) {
+    pricedProducts = products.filter(product => Number(product.price) >= val);
+  } else if (low.checked) {
+    pricedProducts = products.filter(product => Number(product.price) <= val);
+  }
+
+  // Intersection of filters
+  let commonproducts = filteredProducts.filter(x => pricedProducts.includes(x));
+
+  if (commonproducts.length === 0) {
+    items.innerHTML = '<h2 class="message">No products found</h2>';
+    return;
+  }
+
+  // ✅ Sort logic (make a copy so we don’t mutate products)
+  let displayProducts = [...commonproducts];
+
+  // Alphabetical sort
+  if (alpha.checked) {
+    displayProducts.sort((a, b) =>
+      a.name.localeCompare(b.name, undefined, { sensitivity: 'base' })
+    );
+  }
+
+  // Sort by price ascending
+  if (sorth.checked) {
+    displayProducts.sort((a, b) => Number(a.price) - Number(b.price));
+  }
+
+  // Sort by price descending
+  if (sortl.checked) {
+    displayProducts.sort((a, b) => Number(b.price) - Number(a.price));
+  }
+
+  // Show delete all button
+  const del = document.createElement('button');
+  del.className = 'delete';
+  del.id = 'delete-all';
+  del.innerHTML = 'Delete All';
+  del.addEventListener('click', () => {
+    localStorage.removeItem('products');
+    products = [];
+    renderProducts();
+  });
+  body.appendChild(del);
+
+  // Render products
+  displayProducts.forEach(product => {
+    const index = products.indexOf(product); // real index
+    const div = document.createElement('div');
+    div.className = 'item';
+     const isFav = favorites.some(f => f.name === product.name && f.price === product.price && f.image === product.image);
+     let starsHTML = "";
+for (let i = 1; i <= 5; i++) {
+  starsHTML += `<span class="star" data-index="${index}" data-star="${i}">${i <= product.rating ? "★" : "☆"}</span>`;
+}
+    div.innerHTML = `
+      <a href='item.html' class='info' data-index='${index}'> <img src="${product.image}" alt="" width="100"> </a>
+      <p><strong>${product.name}</strong></p>
+      <p>Price: ${product.price}$</p>
+      <div class="rating">${starsHTML}</div>
+      <button class="but" data-index="${index}">Delete</button>
+      <button class="update" data-index="${index}">Update</button>
+      <button class="buy" data-index="${index}">Buy</button>
+      <button class="fav" data-index="${index}">${isFav ? '❤️' : '♡'}</button>
+
+
+    `;
+    items.appendChild(div);
+  });
+
+  // Delete + Update handlers (same as before) …
+   // Delete buttons
+    document.querySelectorAll('.but').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const index = e.target.getAttribute('data-index');
+        products.splice(index, 1);
+        localStorage.setItem('products', JSON.stringify(products));
+        renderProducts();
+      });
+    });
+
+    // Update buttons
+    document.querySelectorAll('.update').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        editingIndex = e.target.getAttribute('data-index');
+        const product = products[editingIndex];
+        editName.value = product.name;
+        editPrice.value = product.price;
+        editImage.value = product.image;
+        popup.style.display = 'block';
+        overlay.style.display = 'block';
+      });
+    });
+    document.querySelectorAll('.buy').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        const index = e.target.getAttribute('data-index');
+        const product = products[index];
+
+        // Update cart count
+        let temp = parseInt(count.textContent) || 0;
+        count.textContent = ++temp;
+
+        // Create a flying clone of the product image
+        const productImg = e.target.parentElement.querySelector('img');
+        const flyImg = productImg.cloneNode(true);
+        flyImg.classList.add('fly-img');
+        document.body.appendChild(flyImg);
+
+        // Set starting position
+        const rect = productImg.getBoundingClientRect();
+        flyImg.style.top = rect.top + 'px';
+        flyImg.style.left = rect.left + 'px';
+
+        // Calculate target position (cart icon)
+        const cartRect = cart.getBoundingClientRect();
+        const x = cartRect.left - rect.left;
+        const y = cartRect.top - rect.top;
+
+        // Trigger animation
+        requestAnimationFrame(() => {
+            flyImg.style.transform = `translate(${x}px, ${y}px) scale(0.1)`;
+            flyImg.style.opacity = '0.5';
+        });
+
+        // Remove after animation
+        flyImg.addEventListener('transitionend', () => {
+            flyImg.remove();
+        });
+
+        // Add product to cart in localStorage
+        tempproducts.push(product);
+        localStorage.setItem('tempproducts', JSON.stringify(tempproducts));
+    });
+});
+ // Favorite buttons
+  document.querySelectorAll('.fav').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      const index = e.target.getAttribute('data-index');
+      const product = products[index];
+      const favIndex = favorites.findIndex(f => f.name === product.name && f.price === product.price && f.image === product.image);
+
+      if (favIndex === -1) {
+        favorites.push(product); // add to favorites
+      } else {
+        favorites.splice(favIndex, 1); // remove from favorites
+      }
+      localStorage.setItem('favorites', JSON.stringify(favorites));
+      renderProducts(filter, val); // re-render to update heart icons
+    });
+  });
+  document.querySelectorAll('.info').forEach(link => {
+  link.addEventListener('click', (e) => {
+    const index = e.currentTarget.getAttribute('data-index');
+    const product = products[index];
+
+    // Save the clicked product to localStorage
+    localStorage.setItem('infoprod', JSON.stringify(product));
+  });
+});
+document.querySelectorAll('.star').forEach(star => {
+  star.addEventListener('click', (e) => {
+    const productIndex = e.target.getAttribute('data-index');
+    const starValue = parseInt(e.target.getAttribute('data-star'));
+
+    // Save new rating
+    products[productIndex].rating = starValue;
+    localStorage.setItem('products', JSON.stringify(products));
+
+    // Re-render to update filled stars
+    renderProducts();
+  });
+});
+}
+    
+  
+  
+  searchInput.addEventListener('input', () => {
+  renderProducts(searchInput.value,Number(searchprice.value));
+});
+searchprice.addEventListener('input', () => {
+  renderProducts(searchInput.value,Number(searchprice.value));
+});
+high.addEventListener('change', () => {
+  if (high.checked) low.checked = false;
+  renderProducts(searchInput.value, Number(searchprice.value));
+});
+alpha.addEventListener('change', () => renderProducts(searchInput.value, Number(searchprice.value)));
+sorth.addEventListener('change', () => {
+  if (sorth.checked) sortl.checked = false; // turn off the other
+  renderProducts(searchInput.value, Number(searchprice.value));
+});
+
+sortl.addEventListener('change', () => {
+  if (sortl.checked) sorth.checked = false;
+  renderProducts(searchInput.value, Number(searchprice.value));
+});
+
+
+
+low.addEventListener('change', () => {
+  if (low.checked) high.checked = false;
+  renderProducts(searchInput.value, Number(searchprice.value));
+});
+  saveBtn.addEventListener('click', () => {
+    if (editingIndex !== null) {
+      products[editingIndex] = {
+        name: editName.value.trim(),
+        price: editPrice.value.trim(),
+        image: editImage.value.trim()
+      };
+      localStorage.setItem('products', JSON.stringify(products));
+      renderProducts();
+      popup.style.display = 'none';
+      overlay.style.display = 'none';
+    }
+  });
+
+  cancelBtn.addEventListener('click', () => {
+    popup.style.display = 'none';
+    overlay.style.display = 'none';
+  });
+
+  document.querySelector('.create').addEventListener('click', () => {
+    window.location.href = 'create.html';
+  });
+  document.querySelector('.cart').addEventListener('click', () => {
+    window.location.href = 'cart.html';
+  });
+  // Toggle dropdown on button click
+sortToggle.addEventListener("click", () => {
+  if (sortMenu.style.display === "block") {
+    // if it's already open → hide it
+    sortMenu.style.display = "none";
+  } else {
+    // if it's hidden → show it
+    sortMenu.style.display = "block";
+  }
+});
+
+  function cl(){
+    localStorage.removeItem('tempproducts')
+    tempproducts=[]
+    count.innerHTML='0'
+  }
+
+  function Mode(){
+    const items = document.querySelectorAll('.item');
+  
+  body.style.backgroundColor = black;
+  header.style.color = white;
+
+  items.forEach(item => {
+    item.style.backgroundColor = black;
+    item.style.color = white;
+
+    const img = item.querySelector('img');
+  if (img) {
+    img.style.backgroundColor = black;
+  }});
+  
+  [white, black] = [black, white];
+
+
+  }
+
+  renderProducts();
+
+</script>
+
+</body>
+</html>

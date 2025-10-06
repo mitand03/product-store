@@ -1,0 +1,59 @@
+<style>
+    .items{
+        display:flex;
+        padding: 30px;
+        flex-wrap: wrap; /* Optional: wrap to next line if needed */
+        gap: 20px; 
+    }
+    .item {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    width: 200px;
+    text-align: center;
+    background-color: #f9f9f9;
+}
+</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart</title>
+</head>
+<body>
+    <h2>Cart</h2>
+    <button id="clear">clear</button>
+    <div class="items" id="items"></div>
+    <p>total:<span id="total">0</span>$</p>
+</body>
+<script>
+    const items = document.getElementById('items');
+    let tempproducts = JSON.parse(localStorage.getItem('tempproducts')) || [];
+    let total=document.getElementById('total')
+    let val=0
+
+    tempproducts.forEach(product => {
+        const div = document.createElement('div');
+        div.className = 'item';
+        div.innerHTML = `
+          <img src="${product.image}" alt="" width="100">
+          <p><strong>${product.name}</strong></p>
+          <p>Price: ${product.price}$</p>
+        `;
+       
+        items.appendChild(div);
+
+    });
+    function updateTotal() {
+  let val = tempproducts.reduce((sum, product) => sum + Number(product.price), 0);
+  total.innerHTML = val.toFixed(2);
+}
+    document.getElementById('clear').addEventListener('click',()=>{
+        localStorage.removeItem('tempproducts')
+        tempproducts=[]
+        items.innerHTML=''
+        updateTotal()
+    })
+    updateTotal()
+</script>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>info</title>
+</head>
+<body>
+    <h1>PRODUCT</h1>
+</body>
+<script>
+    const bod=document.querySelector('body')
+   const product = JSON.parse(localStorage.getItem('infoprod'));
+   const info=document.createElement('div')
+   info.innerHTML=`
+      <img src="${product.image}" alt="" width="100">
+      <p><strong>${product.name}</strong></p>
+      <p>Price: ${product.price}$</p>
+      <p>${product.info ? "Info: " + product.info : "No info for this product"}</p>
+      
+
+
+    `;
+    bod.appendChild(info)
+    
+   
+
+</script>
+</html>
