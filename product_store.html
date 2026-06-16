@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="shared.css">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -27,7 +28,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 14px 30px;
+            padding: 12px 24px;
             position: sticky;
             top: 0;
             z-index: 200;
@@ -36,35 +37,34 @@
             -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.25);
             box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            gap: 12px;
         }
 
         .title {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 700;
             color: white;
             letter-spacing: 3px;
             text-shadow: 0 2px 12px rgba(0,0,0,0.25);
+            white-space: nowrap;
+            flex-shrink: 0;
         }
-
-        .head-left { width: 80px; }
 
         .head-right {
             display: flex;
             align-items: center;
             gap: 8px;
+            flex-shrink: 0;
         }
 
         .create, .mode, .cart, .clear {
             border-radius: 50px;
-            height: 42px;
-            padding: 0 16px;
+            height: 40px;
+            padding: 0 14px;
             border: none;
             cursor: pointer;
             font-family: 'Poppins', sans-serif;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
             transition: all 0.25s ease;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
@@ -87,14 +87,14 @@
             align-items: center;
             justify-content: center;
             gap: 14px;
-            margin: 28px auto 16px;
+            margin: 26px auto 14px;
             flex-wrap: wrap;
             padding: 0 20px;
         }
 
         .search-bar input[type="text"] {
             padding: 11px 20px;
-            width: 240px;
+            width: 230px;
             border-radius: 50px;
             border: none;
             background: rgba(255, 255, 255, 0.9);
@@ -107,7 +107,6 @@
         }
 
         .search-bar input[type="text"]::placeholder { color: #9ca3af; }
-
         .search-bar input[type="text"]:focus {
             background: white;
             box-shadow: 0 4px 28px rgba(0, 0, 0, 0.25);
@@ -132,11 +131,11 @@
             padding: 2px 0;
         }
 
-        /* ── SORT DROPDOWN ── */
+        /* ── SORT ── */
         .sort-dropdown {
             position: relative;
             display: inline-block;
-            margin: 0 0 12px 30px;
+            margin: 0 0 12px 24px;
         }
 
         #sortToggle {
@@ -153,16 +152,12 @@
             transition: all 0.2s ease;
         }
 
-        #sortToggle:hover {
-            background: white;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-        }
+        #sortToggle:hover { background: white; box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
 
         .sort-menu {
             display: none;
             position: absolute;
             background: white;
-            border: none;
             padding: 14px 18px;
             margin-top: 8px;
             border-radius: 14px;
@@ -185,9 +180,9 @@
         /* ── ITEMS GRID ── */
         .items {
             display: flex;
-            padding: 20px 30px 40px;
+            padding: 20px 24px 40px;
             flex-wrap: wrap;
-            gap: 24px;
+            gap: 22px;
         }
 
         /* ── PRODUCT CARD ── */
@@ -195,22 +190,22 @@
             background: white;
             border: none;
             border-radius: 20px;
-            width: 220px;
+            width: 210px;
             text-align: center;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.14);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             overflow: hidden;
         }
 
         .item:hover {
             transform: translateY(-8px);
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.24);
         }
 
         .img-container {
             width: 100%;
-            height: 160px;
-            background: linear-gradient(135deg, #f0f4ff 0%, #e8f0fe 100%);
+            height: 155px;
+            background: linear-gradient(135deg, #f0f4ff, #e8f0fe);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -224,39 +219,37 @@
             transition: transform 0.35s ease;
         }
 
-        .item:hover .img-container img {
-            transform: scale(1.08);
-        }
+        .item:hover .img-container img { transform: scale(1.08); }
 
         .info { text-decoration: none; display: block; }
 
-        .card-body { padding: 14px 14px 16px; }
+        .card-body { padding: 13px 13px 15px; }
 
         .product-name {
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 600;
             color: #1f2937;
-            margin-bottom: 4px;
+            margin-bottom: 3px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
         }
 
         .product-price {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 700;
             color: #7c3aed;
-            margin-bottom: 8px;
+            margin-bottom: 7px;
         }
 
         /* ── STARS ── */
-        .rating { margin: 6px 0 10px; }
+        .rating { margin: 5px 0 9px; }
 
         .star {
-            font-size: 18px;
+            font-size: 17px;
             cursor: pointer;
             color: #d1d5db;
-            transition: transform 0.2s ease, color 0.15s ease;
+            transition: transform 0.2s ease, color 0.15s;
             user-select: none;
         }
 
@@ -266,7 +259,7 @@
         /* ── CARD BUTTONS ── */
         .card-actions {
             display: flex;
-            gap: 6px;
+            gap: 5px;
             justify-content: center;
             flex-wrap: wrap;
         }
@@ -274,8 +267,8 @@
         .but, .update, .buy, .fav {
             border: none;
             border-radius: 20px;
-            padding: 6px 12px;
-            font-size: 12px;
+            padding: 6px 11px;
+            font-size: 11px;
             font-weight: 600;
             font-family: 'Poppins', sans-serif;
             cursor: pointer;
@@ -286,11 +279,11 @@
         .but    { background: linear-gradient(135deg, #ef4444, #dc2626); }
         .update { background: linear-gradient(135deg, #10b981, #059669); }
         .buy    { background: linear-gradient(135deg, #667eea, #764ba2); }
-        .fav    { background: rgba(0,0,0,0.06); color: #374151; font-size: 14px; padding: 6px 10px; }
+        .fav    { background: rgba(0,0,0,0.06); color: #374151; font-size: 13px; padding: 6px 9px; }
 
         .but:hover, .update:hover, .buy:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.22);
         }
 
         .fav:hover { transform: scale(1.2); }
@@ -298,37 +291,38 @@
         /* ── DELETE ALL ── */
         .delete {
             display: block;
-            margin: 4px auto 12px;
+            margin: 4px auto 10px;
             border: none;
-            padding: 10px 24px;
+            padding: 9px 22px;
             background: linear-gradient(135deg, #ef4444, #b91c1c);
             color: white;
             border-radius: 20px;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
             font-family: 'Poppins', sans-serif;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+            box-shadow: 0 4px 15px rgba(239,68,68,0.4);
             transition: all 0.2s ease;
         }
 
         .delete:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(239, 68, 68, 0.5);
+            box-shadow: 0 6px 20px rgba(239,68,68,0.5);
         }
 
         /* ── MESSAGES ── */
         .message {
             color: white;
             text-align: center;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 500;
             width: 100%;
             padding: 60px 20px;
             text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            opacity: 0.9;
         }
 
-        /* ── POPUP ── */
+        /* ── UPDATE POPUP ── */
         .popup {
             position: fixed;
             top: 50%;
@@ -340,27 +334,27 @@
             border-radius: 20px;
             display: none;
             z-index: 1000;
-            width: 340px;
+            width: 330px;
         }
 
         .popup h3 {
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 700;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             color: #1f2937;
         }
 
         .popup input {
             display: block;
             margin-bottom: 12px;
-            padding: 10px 15px;
+            padding: 10px 14px;
             width: 100%;
             border: 2px solid #e5e7eb;
             border-radius: 10px;
             font-family: 'Poppins', sans-serif;
             font-size: 14px;
             outline: none;
-            transition: border-color 0.2s ease;
+            transition: border-color 0.2s;
             color: #1f2937;
         }
 
@@ -368,19 +362,18 @@
 
         .popup button {
             margin-right: 10px;
-            padding: 10px 20px;
+            padding: 10px 18px;
             border-radius: 10px;
             border: none;
             font-family: 'Poppins', sans-serif;
             font-weight: 600;
-            font-size: 14px;
+            font-size: 13px;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.2s;
         }
 
         #save-update   { background: linear-gradient(135deg, #667eea, #764ba2); color: white; }
         #cancel-update { background: #f3f4f6; color: #374151; }
-
         #save-update:hover   { transform: translateY(-1px); box-shadow: 0 4px 15px rgba(102,126,234,0.4); }
         #cancel-update:hover { background: #e5e7eb; }
 
@@ -397,7 +390,7 @@
         /* ── FLY ANIMATION ── */
         .fly-img {
             position: fixed;
-            width: 80px;
+            width: 70px;
             height: auto;
             pointer-events: none;
             transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s;
@@ -409,70 +402,50 @@
         body.dark-mode {
             background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
         }
-
         body.dark-mode .head {
-            background: rgba(0, 0, 0, 0.4);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+            background: rgba(0,0,0,0.4);
+            border-bottom: 1px solid rgba(255,255,255,0.07);
         }
-
-        body.dark-mode .item {
-            background: #1e1e2e;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
-        }
-
+        body.dark-mode .item          { background: #1e1e2e; box-shadow: 0 8px 32px rgba(0,0,0,0.5); }
         body.dark-mode .img-container { background: #2a2a3e; }
-
-        body.dark-mode .product-name { color: #e2e8f0; }
+        body.dark-mode .product-name  { color: #e2e8f0; }
         body.dark-mode .product-price { color: #a78bfa; }
-        body.dark-mode .fav { background: rgba(255,255,255,0.07); color: white; }
-
-        body.dark-mode .search-bar input[type="text"] {
-            background: rgba(255,255,255,0.1);
-            color: white;
-        }
-
+        body.dark-mode .fav           { background: rgba(255,255,255,0.07); color: white; }
+        body.dark-mode .search-bar input[type="text"] { background: rgba(255,255,255,0.1); color: white; }
         body.dark-mode .search-bar input[type="text"]::placeholder { color: rgba(255,255,255,0.4); }
-
-        body.dark-mode .checkboxes {
-            background: rgba(255,255,255,0.1);
-        }
-
+        body.dark-mode .checkboxes    { background: rgba(255,255,255,0.1); }
         body.dark-mode .checkboxes label { color: #e2e8f0; }
-
-        body.dark-mode #sortToggle {
-            background: rgba(255,255,255,0.1);
-            color: #e2e8f0;
-        }
-
-        body.dark-mode .sort-menu {
-            background: #1e1e2e;
-        }
-
+        body.dark-mode #sortToggle    { background: rgba(255,255,255,0.1); color: #e2e8f0; }
+        body.dark-mode .sort-menu     { background: #1e1e2e; }
         body.dark-mode .sort-menu label { color: #e2e8f0; }
-
-        body.dark-mode .popup {
-            background: #1e1e2e;
-        }
-
-        body.dark-mode .popup h3 { color: #e2e8f0; }
-
-        body.dark-mode .popup input {
-            background: #2a2a3e;
-            border-color: #3d3d5d;
-            color: #e2e8f0;
-        }
-
-        body.dark-mode #cancel-update {
-            background: #2a2a3e;
-            color: #e2e8f0;
-        }
+        body.dark-mode .popup         { background: #1e1e2e; }
+        body.dark-mode .popup h3      { color: #e2e8f0; }
+        body.dark-mode .popup input   { background: #2a2a3e; border-color: #3d3d5d; color: #e2e8f0; }
+        body.dark-mode #cancel-update { background: #2a2a3e; color: #e2e8f0; }
     </style>
 </head>
 <body>
 
+<!-- ── HEADER ── -->
 <div class="head">
-    <div class="head-left"></div>
+
+    <!-- LEFT: User Widget -->
+    <div class="user-widget" id="user-widget" onclick="toggleUserMenu()">
+        <div class="uw-avatar" id="uw-avatar">?</div>
+        <div class="uw-info">
+            <span class="uw-name"    id="uw-name">Loading...</span>
+            <span class="uw-balance" id="uw-balance">💰 0.00$</span>
+        </div>
+        <span class="uw-chevron">▾</span>
+        <div class="uw-menu" id="uw-menu">
+            <button onclick="event.stopPropagation(); openBalanceModal()">💵 Add Balance</button>
+            <button class="logout-btn" onclick="event.stopPropagation(); doLogout()">↩ Logout</button>
+        </div>
+    </div>
+
     <h2 class="title">PRODUCT STORE</h2>
+
+    <!-- RIGHT: Actions -->
     <div class="head-right">
         <button class="create">+ Create</button>
         <button class="mode" onclick="Mode()">☀ Mode</button>
@@ -481,8 +454,9 @@
     </div>
 </div>
 
+<!-- ── SEARCH ── -->
 <div class="search-bar">
-    <input type="text" id="searchprice" placeholder="🔍 Search by price">
+    <input type="text" id="searchprice" placeholder="🔍 Filter by price">
     <div class="checkboxes">
         <label><input type="checkbox" id="checkhigh"> Higher</label>
         <label><input type="checkbox" id="checklow"> Lower</label>
@@ -501,108 +475,102 @@
 
 <div class="items" id="items"></div>
 
+<!-- Update Popup -->
 <div class="popup" id="popup">
     <h3>Update Product</h3>
-    <input type="text" id="edit-name" placeholder="Product Name">
+    <input type="text" id="edit-name"  placeholder="Product Name">
     <input type="text" id="edit-price" placeholder="Price">
     <input type="text" id="edit-image" placeholder="Image URL">
     <button id="save-update">Save</button>
     <button id="cancel-update">Cancel</button>
 </div>
-
 <div class="overlay" id="overlay"></div>
 
-<script>
-    const high = document.getElementById('checkhigh');
-    const low = document.getElementById('checklow');
-    const alpha = document.getElementById('alpha');
-    const sorth = document.getElementById('sortH');
-    const sortl = document.getElementById('sortL');
-    const sortToggle = document.getElementById("sortToggle");
-    const sortMenu = document.getElementById("sortMenu");
-    const count = document.querySelector('.count');
-    const cart = document.querySelector('.cart');
+<!-- Balance Modal (shared) -->
+<div id="balance-modal" class="balance-modal" style="display:none">
+    <h3>💰 Add Balance</h3>
+    <div class="quick-amounts">
+        <button onclick="setQuickAmount(10)">+ 10$</button>
+        <button onclick="setQuickAmount(50)">+ 50$</button>
+        <button onclick="setQuickAmount(100)">+ 100$</button>
+        <button onclick="setQuickAmount(500)">+ 500$</button>
+    </div>
+    <input type="number" id="balance-amount" placeholder="Custom amount ($)..." min="1">
+    <div class="modal-btns">
+        <button class="btn-confirm" onclick="submitBalance()">Add Balance</button>
+        <button class="btn-cancel"  onclick="closeBalanceModal()">Cancel</button>
+    </div>
+</div>
+<div id="balance-overlay" class="balance-overlay" style="display:none" onclick="closeBalanceModal()"></div>
 
-    const items = document.getElementById('items');
-    const overlay = document.getElementById('overlay');
-    const popup = document.getElementById('popup');
-    const editName = document.getElementById('edit-name');
-    const editPrice = document.getElementById('edit-price');
-    const editImage = document.getElementById('edit-image');
-    const saveBtn = document.getElementById('save-update');
-    const cancelBtn = document.getElementById('cancel-update');
-    const body = document.querySelector('body');
+<script src="auth.js"></script>
+<script>
+    const high        = document.getElementById('checkhigh');
+    const low         = document.getElementById('checklow');
+    const alpha       = document.getElementById('alpha');
+    const sorth       = document.getElementById('sortH');
+    const sortl       = document.getElementById('sortL');
+    const sortToggle  = document.getElementById('sortToggle');
+    const sortMenu    = document.getElementById('sortMenu');
+    const count       = document.querySelector('.count');
+    const cart        = document.querySelector('.cart');
+    const items       = document.getElementById('items');
+    const overlay     = document.getElementById('overlay');
+    const popup       = document.getElementById('popup');
+    const editName    = document.getElementById('edit-name');
+    const editPrice   = document.getElementById('edit-price');
+    const editImage   = document.getElementById('edit-image');
+    const saveBtn     = document.getElementById('save-update');
+    const cancelBtn   = document.getElementById('cancel-update');
+    const body        = document.querySelector('body');
     const searchInput = document.getElementById('search');
     const searchprice = document.getElementById('searchprice');
 
-    let products = JSON.parse(localStorage.getItem('products')) || [];
+    let products     = JSON.parse(localStorage.getItem('products'))     || [];
     let tempproducts = JSON.parse(localStorage.getItem('tempproducts')) || [];
+    let favorites    = JSON.parse(localStorage.getItem('favorites'))    || [];
     let editingIndex = null;
-    let favorites = JSON.parse(localStorage.getItem('favorites')) || [];
 
-    function renderProducts(filter = "", val = 0) {
-        const oldDeleteBtn = document.getElementById('delete-all');
-        if (oldDeleteBtn) oldDeleteBtn.remove();
-
+    function renderProducts(filter = '', val = 0) {
+        const oldDel = document.getElementById('delete-all');
+        if (oldDel) oldDel.remove();
         items.innerHTML = '';
 
-        const filteredProducts = products.filter(p =>
-            p.name.toLowerCase().includes(filter.toLowerCase())
-        );
+        let filtered = products.filter(p => p.name.toLowerCase().includes(filter.toLowerCase()));
+        let priced   = products;
+        if (high.checked) priced = products.filter(p => Number(p.price) >= val);
+        else if (low.checked) priced = products.filter(p => Number(p.price) <= val);
 
-        let pricedProducts = products;
-        if (high.checked) {
-            pricedProducts = products.filter(p => Number(p.price) >= val);
-        } else if (low.checked) {
-            pricedProducts = products.filter(p => Number(p.price) <= val);
-        }
+        let list = filtered.filter(x => priced.includes(x));
 
-        let commonproducts = filteredProducts.filter(x => pricedProducts.includes(x));
-
-        if (commonproducts.length === 0) {
+        if (list.length === 0) {
             items.innerHTML = '<h2 class="message">No products found</h2>';
             return;
         }
 
-        let displayProducts = [...commonproducts];
-
-        if (alpha.checked) {
-            displayProducts.sort((a, b) => a.name.localeCompare(b.name, undefined, { sensitivity: 'base' }));
-        }
-        if (sorth.checked) {
-            displayProducts.sort((a, b) => Number(a.price) - Number(b.price));
-        }
-        if (sortl.checked) {
-            displayProducts.sort((a, b) => Number(b.price) - Number(a.price));
-        }
+        let display = [...list];
+        if (alpha.checked) display.sort((a,b) => a.name.localeCompare(b.name, undefined, { sensitivity:'base' }));
+        if (sorth.checked) display.sort((a,b) => Number(a.price) - Number(b.price));
+        if (sortl.checked) display.sort((a,b) => Number(b.price) - Number(a.price));
 
         const del = document.createElement('button');
-        del.className = 'delete';
-        del.id = 'delete-all';
-        del.innerHTML = 'Delete All';
-        del.addEventListener('click', () => {
-            localStorage.removeItem('products');
-            products = [];
-            renderProducts();
-        });
+        del.className = 'delete'; del.id = 'delete-all'; del.textContent = 'Delete All';
+        del.addEventListener('click', () => { localStorage.removeItem('products'); products = []; renderProducts(); });
         body.appendChild(del);
 
-        displayProducts.forEach(product => {
+        display.forEach(product => {
             const index = products.indexOf(product);
-            const div = document.createElement('div');
+            const div   = document.createElement('div');
             div.className = 'item';
+            const isFav = favorites.some(f => f.name===product.name && f.price===product.price && f.image===product.image);
 
-            const isFav = favorites.some(f =>
-                f.name === product.name && f.price === product.price && f.image === product.image
-            );
-
-            let starsHTML = "";
-            for (let i = 1; i <= 5; i++) {
-                starsHTML += `<span class="star${i <= (product.rating || 0) ? ' filled' : ''}" data-index="${index}" data-star="${i}">★</span>`;
+            let starsHTML = '';
+            for (let i=1; i<=5; i++) {
+                starsHTML += `<span class="star${i <= (product.rating||0) ? ' filled' : ''}" data-index="${index}" data-star="${i}">★</span>`;
             }
 
             div.innerHTML = `
-                <a href='item.html' class='info' data-index='${index}'>
+                <a href='/item.html' class='info' data-index='${index}'>
                     <div class="img-container">
                         <img src="${product.image}" alt="${product.name}">
                     </div>
@@ -612,163 +580,120 @@
                     <p class="product-price">${product.price}$</p>
                     <div class="rating">${starsHTML}</div>
                     <div class="card-actions">
-                        <button class="but" data-index="${index}">Delete</button>
+                        <button class="but"    data-index="${index}">Delete</button>
                         <button class="update" data-index="${index}">Update</button>
-                        <button class="buy" data-index="${index}">Buy</button>
-                        <button class="fav" data-index="${index}">${isFav ? '❤️' : '♡'}</button>
+                        <button class="buy"    data-index="${index}">Buy</button>
+                        <button class="fav"    data-index="${index}">${isFav ? '❤️' : '♡'}</button>
                     </div>
                 </div>
             `;
             items.appendChild(div);
         });
 
-        document.querySelectorAll('.but').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const index = e.target.getAttribute('data-index');
-                products.splice(index, 1);
-                localStorage.setItem('products', JSON.stringify(products));
-                renderProducts();
+        // Delete
+        document.querySelectorAll('.but').forEach(btn => btn.addEventListener('click', e => {
+            products.splice(e.target.getAttribute('data-index'), 1);
+            localStorage.setItem('products', JSON.stringify(products));
+            renderProducts();
+        }));
+
+        // Update
+        document.querySelectorAll('.update').forEach(btn => btn.addEventListener('click', e => {
+            editingIndex     = e.target.getAttribute('data-index');
+            const p          = products[editingIndex];
+            editName.value   = p.name;
+            editPrice.value  = p.price;
+            editImage.value  = p.image;
+            popup.style.display   = 'block';
+            overlay.style.display = 'block';
+        }));
+
+        // Buy → fly to cart
+        document.querySelectorAll('.buy').forEach(btn => btn.addEventListener('click', e => {
+            const index   = e.target.getAttribute('data-index');
+            const product = products[index];
+            count.textContent = (parseInt(count.textContent)||0) + 1;
+
+            const productImg = e.target.closest('.item').querySelector('img');
+            const flyImg     = productImg.cloneNode(true);
+            flyImg.classList.add('fly-img');
+            document.body.appendChild(flyImg);
+
+            const rect     = productImg.getBoundingClientRect();
+            const cartRect = cart.getBoundingClientRect();
+            flyImg.style.top  = rect.top  + 'px';
+            flyImg.style.left = rect.left + 'px';
+
+            requestAnimationFrame(() => {
+                flyImg.style.transform = `translate(${cartRect.left-rect.left}px, ${cartRect.top-rect.top}px) scale(0.1)`;
+                flyImg.style.opacity   = '0.3';
             });
-        });
+            flyImg.addEventListener('transitionend', () => flyImg.remove());
 
-        document.querySelectorAll('.update').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                editingIndex = e.target.getAttribute('data-index');
-                const product = products[editingIndex];
-                editName.value = product.name;
-                editPrice.value = product.price;
-                editImage.value = product.image;
-                popup.style.display = 'block';
-                overlay.style.display = 'block';
-            });
-        });
+            tempproducts.push(product);
+            localStorage.setItem('tempproducts', JSON.stringify(tempproducts));
+        }));
 
-        document.querySelectorAll('.buy').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const index = e.target.getAttribute('data-index');
-                const product = products[index];
+        // Favorites
+        document.querySelectorAll('.fav').forEach(btn => btn.addEventListener('click', e => {
+            const p       = products[e.target.getAttribute('data-index')];
+            const favIdx  = favorites.findIndex(f => f.name===p.name && f.price===p.price && f.image===p.image);
+            if (favIdx === -1) favorites.push(p); else favorites.splice(favIdx, 1);
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            renderProducts(filter, val);
+        }));
 
-                let temp = parseInt(count.textContent) || 0;
-                count.textContent = ++temp;
+        // Info link
+        document.querySelectorAll('.info').forEach(link => link.addEventListener('click', e => {
+            localStorage.setItem('infoprod', JSON.stringify(products[e.currentTarget.getAttribute('data-index')]));
+        }));
 
-                const productImg = e.target.closest('.item').querySelector('img');
-                const flyImg = productImg.cloneNode(true);
-                flyImg.classList.add('fly-img');
-                document.body.appendChild(flyImg);
-
-                const rect = productImg.getBoundingClientRect();
-                flyImg.style.top = rect.top + 'px';
-                flyImg.style.left = rect.left + 'px';
-
-                const cartRect = cart.getBoundingClientRect();
-                const x = cartRect.left - rect.left;
-                const y = cartRect.top - rect.top;
-
-                requestAnimationFrame(() => {
-                    flyImg.style.transform = `translate(${x}px, ${y}px) scale(0.1)`;
-                    flyImg.style.opacity = '0.3';
-                });
-
-                flyImg.addEventListener('transitionend', () => flyImg.remove());
-
-                tempproducts.push(product);
-                localStorage.setItem('tempproducts', JSON.stringify(tempproducts));
-            });
-        });
-
-        document.querySelectorAll('.fav').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const index = e.target.getAttribute('data-index');
-                const product = products[index];
-                const favIndex = favorites.findIndex(f =>
-                    f.name === product.name && f.price === product.price && f.image === product.image
-                );
-                if (favIndex === -1) {
-                    favorites.push(product);
-                } else {
-                    favorites.splice(favIndex, 1);
-                }
-                localStorage.setItem('favorites', JSON.stringify(favorites));
-                renderProducts(filter, val);
-            });
-        });
-
-        document.querySelectorAll('.info').forEach(link => {
-            link.addEventListener('click', (e) => {
-                const index = e.currentTarget.getAttribute('data-index');
-                localStorage.setItem('infoprod', JSON.stringify(products[index]));
-            });
-        });
-
-        document.querySelectorAll('.star').forEach(star => {
-            star.addEventListener('click', (e) => {
-                const productIndex = e.target.getAttribute('data-index');
-                const starValue = parseInt(e.target.getAttribute('data-star'));
-                products[productIndex].rating = starValue;
-                localStorage.setItem('products', JSON.stringify(products));
-                renderProducts();
-            });
-        });
+        // Stars
+        document.querySelectorAll('.star').forEach(star => star.addEventListener('click', e => {
+            products[e.target.getAttribute('data-index')].rating = parseInt(e.target.getAttribute('data-star'));
+            localStorage.setItem('products', JSON.stringify(products));
+            renderProducts();
+        }));
     }
 
-    searchInput.addEventListener('input', () => renderProducts(searchInput.value, Number(searchprice.value)));
-    searchprice.addEventListener('input', () => renderProducts(searchInput.value, Number(searchprice.value)));
+    searchInput.addEventListener('input',  () => renderProducts(searchInput.value, Number(searchprice.value)));
+    searchprice.addEventListener('input',  () => renderProducts(searchInput.value, Number(searchprice.value)));
 
-    high.addEventListener('change', () => {
-        if (high.checked) low.checked = false;
-        renderProducts(searchInput.value, Number(searchprice.value));
-    });
-    low.addEventListener('change', () => {
-        if (low.checked) high.checked = false;
-        renderProducts(searchInput.value, Number(searchprice.value));
-    });
+    high.addEventListener('change',  () => { if (high.checked)  low.checked  = false; renderProducts(searchInput.value, Number(searchprice.value)); });
+    low.addEventListener('change',   () => { if (low.checked)   high.checked = false; renderProducts(searchInput.value, Number(searchprice.value)); });
     alpha.addEventListener('change', () => renderProducts(searchInput.value, Number(searchprice.value)));
-    sorth.addEventListener('change', () => {
-        if (sorth.checked) sortl.checked = false;
-        renderProducts(searchInput.value, Number(searchprice.value));
-    });
-    sortl.addEventListener('change', () => {
-        if (sortl.checked) sorth.checked = false;
-        renderProducts(searchInput.value, Number(searchprice.value));
-    });
+    sorth.addEventListener('change', () => { if (sorth.checked) sortl.checked = false; renderProducts(searchInput.value, Number(searchprice.value)); });
+    sortl.addEventListener('change', () => { if (sortl.checked) sorth.checked = false; renderProducts(searchInput.value, Number(searchprice.value)); });
 
     saveBtn.addEventListener('click', () => {
         if (editingIndex !== null) {
-            products[editingIndex] = {
-                name: editName.value.trim(),
-                price: editPrice.value.trim(),
-                image: editImage.value.trim()
-            };
+            products[editingIndex] = { name: editName.value.trim(), price: editPrice.value.trim(), image: editImage.value.trim() };
             localStorage.setItem('products', JSON.stringify(products));
             renderProducts();
-            popup.style.display = 'none';
-            overlay.style.display = 'none';
+            popup.style.display = overlay.style.display = 'none';
         }
     });
 
-    cancelBtn.addEventListener('click', () => {
-        popup.style.display = 'none';
-        overlay.style.display = 'none';
-    });
+    cancelBtn.addEventListener('click', () => { popup.style.display = overlay.style.display = 'none'; });
 
-    document.querySelector('.create').addEventListener('click', () => window.location.href = 'create.html');
-    document.querySelector('.cart').addEventListener('click', () => window.location.href = 'cart.html');
+    document.querySelector('.create').addEventListener('click', () => window.location.href = '/create.html');
+    document.querySelector('.cart').addEventListener('click',   () => window.location.href = '/cart.html');
 
-    sortToggle.addEventListener("click", () => {
-        sortMenu.style.display = sortMenu.style.display === "block" ? "none" : "block";
+    sortToggle.addEventListener('click', () => {
+        sortMenu.style.display = sortMenu.style.display === 'block' ? 'none' : 'block';
     });
 
     function cl() {
         localStorage.removeItem('tempproducts');
         tempproducts = [];
-        count.innerHTML = '0';
+        count.textContent = '0';
     }
 
-    function Mode() {
-        body.classList.toggle('dark-mode');
-    }
+    function Mode() { body.classList.toggle('dark-mode'); }
 
-    renderProducts();
+    // Boot
+    count.textContent = tempproducts.length;
+    initAuth().then(() => renderProducts());
 </script>
 
 </body>

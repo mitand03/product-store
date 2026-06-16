@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="shared.css">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -26,53 +27,52 @@
             width: 100%;
             display: flex;
             align-items: center;
-            padding: 16px 30px;
-            background: rgba(255, 255, 255, 0.15);
+            justify-content: space-between;
+            padding: 12px 24px;
+            background: rgba(255,255,255,0.15);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.25);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid rgba(255,255,255,0.25);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.1);
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 200;
+            gap: 12px;
         }
 
         .back-btn {
             text-decoration: none;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255,255,255,0.2);
             color: white;
             padding: 8px 18px;
             border-radius: 50px;
             font-weight: 600;
             font-size: 13px;
             border: 1px solid rgba(255,255,255,0.3);
-            transition: all 0.2s ease;
+            transition: all 0.2s;
+            flex-shrink: 0;
         }
 
-        .back-btn:hover {
-            background: rgba(255, 255, 255, 0.35);
-            transform: translateY(-1px);
-        }
+        .back-btn:hover { background: rgba(255,255,255,0.35); transform: translateY(-1px); }
 
-        /* ── TITLE ── */
+        /* ── FORM ── */
         h1 {
             color: white;
-            font-size: 1.8rem;
+            font-size: 1.7rem;
             font-weight: 700;
             letter-spacing: 1px;
             text-align: center;
-            margin-top: 50px;
-            margin-bottom: 30px;
+            margin-top: 46px;
+            margin-bottom: 28px;
             text-shadow: 0 2px 12px rgba(0,0,0,0.2);
         }
 
-        /* ── FORM CARD ── */
         .create-card {
             background: white;
-            padding: 36px;
+            padding: 34px;
             width: 380px;
             border-radius: 24px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.25);
         }
 
         .inp {
@@ -87,27 +87,19 @@
             font-family: 'Poppins', sans-serif;
             font-size: 14px;
             outline: none;
-            transition: border-color 0.2s ease, background 0.2s ease;
+            transition: border-color 0.2s, background 0.2s;
         }
 
-        .inp:focus {
-            border-color: #667eea;
-            background: white;
-        }
-
+        .inp:focus { border-color: #667eea; background: white; }
         .inp::placeholder { color: #9ca3af; }
 
-        .desc {
-            height: 110px;
-            resize: vertical;
-            line-height: 1.5;
-        }
+        .desc { height: 110px; resize: vertical; line-height: 1.5; }
 
         .add {
             margin-top: 22px;
             width: 100%;
             padding: 14px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #667eea, #764ba2);
             border: none;
             border-radius: 12px;
             color: white;
@@ -115,32 +107,29 @@
             font-size: 15px;
             font-weight: 600;
             cursor: pointer;
-            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
-            transition: all 0.25s ease;
+            box-shadow: 0 4px 20px rgba(102,126,234,0.4);
+            transition: all 0.25s;
         }
 
-        .add:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 28px rgba(102, 126, 234, 0.55);
-        }
+        .add:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(102,126,234,0.55); }
 
         /* ── TOAST ── */
         .toast {
             position: fixed;
             bottom: 30px;
             left: 50%;
-            transform: translateX(-50%);
+            transform: translateX(-50%) translateY(10px);
             background: linear-gradient(135deg, #10b981, #059669);
             color: white;
             padding: 14px 28px;
             border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);
+            box-shadow: 0 8px 24px rgba(16,185,129,0.4);
             font-family: 'Poppins', sans-serif;
             font-size: 14px;
             font-weight: 600;
             opacity: 0;
             visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
             z-index: 9999;
             white-space: nowrap;
         }
@@ -148,56 +137,87 @@
         .toast.show {
             opacity: 1;
             visibility: visible;
+            transform: translateX(-50%) translateY(0);
         }
     </style>
 </head>
 <body>
 
 <div class="page-header">
-    <a href="product_store.html" class="back-btn">← Back to Store</a>
+    <a href="/product_store.html" class="back-btn">← Back to Store</a>
+    <!-- User Widget -->
+    <div class="user-widget" id="user-widget" onclick="toggleUserMenu()">
+        <div class="uw-avatar" id="uw-avatar">?</div>
+        <div class="uw-info">
+            <span class="uw-name"    id="uw-name">Loading...</span>
+            <span class="uw-balance" id="uw-balance">💰 0.00$</span>
+        </div>
+        <span class="uw-chevron">▾</span>
+        <div class="uw-menu" id="uw-menu">
+            <button onclick="event.stopPropagation(); openBalanceModal()">💵 Add Balance</button>
+            <button class="logout-btn" onclick="event.stopPropagation(); doLogout()">↩ Logout</button>
+        </div>
+    </div>
 </div>
 
 <h1>Create New Product</h1>
 
 <div class="create-card">
-    <input type="text" placeholder="Product Name" class="inp">
-    <input type="text" placeholder="Price (e.g. 29.99)" class="inp">
-    <input type="text" placeholder="Image URL" class="inp">
-    <textarea placeholder="Description (optional)" class="inp desc"></textarea>
-    <button class="add">+ Add Product</button>
+    <input type="text"     placeholder="Product Name"           class="inp" id="inp-name">
+    <input type="text"     placeholder="Price (e.g. 29.99)"     class="inp" id="inp-price">
+    <input type="text"     placeholder="Image URL"              class="inp" id="inp-image">
+    <textarea              placeholder="Description (optional)" class="inp desc" id="inp-desc"></textarea>
+    <button class="add" onclick="addProduct()">+ Add Product</button>
 </div>
 
-<div id="toast" class="toast">Product added successfully!</div>
+<div id="toast" class="toast">Product added!</div>
 
+<!-- Balance Modal -->
+<div id="balance-modal" class="balance-modal" style="display:none">
+    <h3>💰 Add Balance</h3>
+    <div class="quick-amounts">
+        <button onclick="setQuickAmount(10)">+ 10$</button>
+        <button onclick="setQuickAmount(50)">+ 50$</button>
+        <button onclick="setQuickAmount(100)">+ 100$</button>
+        <button onclick="setQuickAmount(500)">+ 500$</button>
+    </div>
+    <input type="number" id="balance-amount" placeholder="Custom amount ($)..." min="1">
+    <div class="modal-btns">
+        <button class="btn-confirm" onclick="submitBalance()">Add Balance</button>
+        <button class="btn-cancel"  onclick="closeBalanceModal()">Cancel</button>
+    </div>
+</div>
+<div id="balance-overlay" class="balance-overlay" style="display:none" onclick="closeBalanceModal()"></div>
+
+<script src="auth.js"></script>
 <script>
-    const addBtn = document.querySelector('.add');
     const products = JSON.parse(localStorage.getItem('products')) || [];
 
-    function showToast(message) {
-        const toast = document.getElementById('toast');
-        toast.textContent = message;
-        toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 3000);
-    }
-
-    addBtn.addEventListener('click', () => {
-        const inputs = document.querySelectorAll('.inp');
-        const name  = inputs[0].value.trim();
-        const price = inputs[1].value.trim();
-        const image = inputs[2].value.trim();
-        const info  = document.querySelector('.desc').value.trim();
+    function addProduct() {
+        const name  = document.getElementById('inp-name').value.trim();
+        const price = document.getElementById('inp-price').value.trim();
+        const image = document.getElementById('inp-image').value.trim();
+        const info  = document.getElementById('inp-desc').value.trim();
 
         if (!name || !price) {
-            showToast('Please fill in at least a name and price.');
+            showToast('Name and price are required.', 'error');
             return;
         }
 
         products.push({ name, price, image, info });
         localStorage.setItem('products', JSON.stringify(products));
 
-        inputs.forEach(i => i.value = '');
-        showToast('Product added successfully!');
-    });
+        document.getElementById('inp-name').value  = '';
+        document.getElementById('inp-price').value = '';
+        document.getElementById('inp-image').value = '';
+        document.getElementById('inp-desc').value  = '';
+
+        const toast = document.getElementById('toast');
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2800);
+    }
+
+    initAuth();
 </script>
 
 </body>

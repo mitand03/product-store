@@ -1,0 +1,227 @@
+/* shared.css — user widget, balance modal (included in every page) */
+
+/* ── User Widget ────────────────────────────────────────────────────────────*/
+.user-widget {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    padding: 6px 14px 6px 6px;
+    border-radius: 50px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    transition: background 0.2s;
+    user-select: none;
+    flex-shrink: 0;
+}
+
+.user-widget:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+.uw-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #f093fb, #f5576c);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: 700;
+    color: white;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.uw-info {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.3;
+}
+
+.uw-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: white;
+}
+
+.uw-balance {
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.uw-chevron {
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 11px;
+    margin-left: 2px;
+    transition: transform 0.2s;
+}
+
+/* Rotate chevron when open */
+.uw-menu.open ~ .uw-chevron { transform: rotate(180deg); }
+
+/* ── Dropdown ── */
+.uw-menu {
+    display: none;
+    position: absolute;
+    top: calc(100% + 10px);
+    left: 0;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.2);
+    padding: 8px;
+    min-width: 190px;
+    z-index: 600;
+    animation: fadeDown 0.15s ease;
+}
+
+@keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.uw-menu.open { display: block; }
+
+.uw-menu button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 10px 14px;
+    border: none;
+    border-radius: 10px;
+    background: none;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #374151;
+    cursor: pointer;
+    transition: background 0.15s;
+    text-align: left;
+}
+
+.uw-menu button:hover          { background: #f3f4f6; }
+.uw-menu .logout-btn           { color: #ef4444; }
+.uw-menu .logout-btn:hover     { background: #fef2f2; }
+
+/* ── Balance Modal ──────────────────────────────────────────────────────────*/
+.balance-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 32px;
+    border-radius: 22px;
+    width: 340px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.28);
+    z-index: 1100;
+    animation: popIn 0.2s ease;
+}
+
+@keyframes popIn {
+    from { opacity: 0; transform: translate(-50%, -48%) scale(0.95); }
+    to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+.balance-modal h3 {
+    font-size: 19px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #1f2937;
+}
+
+.quick-amounts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 14px;
+}
+
+.quick-amounts button {
+    padding: 10px;
+    border: 2px solid #e5e7eb;
+    border-radius: 10px;
+    background: white;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #374151;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.quick-amounts button:hover {
+    border-color: #667eea;
+    color: #667eea;
+    background: #f5f7ff;
+}
+
+.balance-modal input[type="number"] {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    color: #1f2937;
+    outline: none;
+    margin-bottom: 18px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.balance-modal input[type="number"]:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102,126,234,0.12);
+}
+
+.balance-modal input[type="number"]::placeholder { color: #9ca3af; }
+
+.modal-btns { display: flex; gap: 10px; }
+
+.btn-confirm {
+    flex: 1;
+    padding: 12px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    border-radius: 11px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(102,126,234,0.35);
+    transition: all 0.2s;
+}
+
+.btn-confirm:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(102,126,234,0.5);
+}
+
+.btn-cancel {
+    padding: 12px 18px;
+    background: #f3f4f6;
+    color: #374151;
+    border: none;
+    border-radius: 11px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+.btn-cancel:hover { background: #e5e7eb; }
+
+.balance-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    z-index: 1090;
+}
