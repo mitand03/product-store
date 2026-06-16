@@ -1,138 +1,203 @@
-<STYle>
-    .create{
-        margin: 100px auto;
-    background-color: #ffffff;
-    padding: 30px;
-    width: 350px;
-    border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4)
-    }
-    .inp{
-        display: block;
-    width: 100%;
-    margin-top: 15px;
-    padding: 10px;
-    border-radius: 8px;
-    background-color: #1e1e1e;
-    border: none;
-    color: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    font-size: 16px;
-    }
-    h1{
-        
-        text-align: center;
-        margin-top: 60px;
-        color: black;
-    }
-    .add{
-        margin-top: 20px;
-    width: 100%;
-    padding: 12px;
-    background-color: #5dade2;
-    border: none;
-    border-radius: 8px;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    }
-    .add:hover {
-    background-color: #3498db;
-  }
-  body {
-    font-family: Arial, sans-serif;
-    background-color: white;
-    margin: 0;
-    padding: 0;
-  }
-  a {
-    margin: 20px;
-    display: inline-block;
-    text-decoration: none;
-    color: #3498db;
-    font-weight: bold;
-  }
-  .toast {
-  position: fixed;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: #28a745; /* green */
-  color: white;
-  padding: 12px 24px;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  font-size: 14px;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
-  z-index: 9999;
-}
-.toast.show {
-  opacity: 1;
-  visibility: visible;
-}
-.desc {
-  height: 120px;        /* make it taller */
-  resize: vertical;     /* allow user to resize vertically */
-  font-family: Arial, sans-serif;
-  line-height: 1.4;
-}
-
-</STYle>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CREATE_PRODUCT</title>
+    <title>Create Product – Product Store</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: 60px;
+        }
+
+        /* ── HEADER ── */
+        .page-header {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            padding: 16px 30px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 13px;
+            border: 1px solid rgba(255,255,255,0.3);
+            transition: all 0.2s ease;
+        }
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.35);
+            transform: translateY(-1px);
+        }
+
+        /* ── TITLE ── */
+        h1 {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-align: center;
+            margin-top: 50px;
+            margin-bottom: 30px;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.2);
+        }
+
+        /* ── FORM CARD ── */
+        .create-card {
+            background: white;
+            padding: 36px;
+            width: 380px;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+        }
+
+        .inp {
+            display: block;
+            width: 100%;
+            margin-top: 14px;
+            padding: 12px 16px;
+            border-radius: 12px;
+            background: #f9fafb;
+            border: 2px solid #e5e7eb;
+            color: #1f2937;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.2s ease, background 0.2s ease;
+        }
+
+        .inp:focus {
+            border-color: #667eea;
+            background: white;
+        }
+
+        .inp::placeholder { color: #9ca3af; }
+
+        .desc {
+            height: 110px;
+            resize: vertical;
+            line-height: 1.5;
+        }
+
+        .add {
+            margin-top: 22px;
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+            transition: all 0.25s ease;
+        }
+
+        .add:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(102, 126, 234, 0.55);
+        }
+
+        /* ── TOAST ── */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+            z-index: 9999;
+            white-space: nowrap;
+        }
+
+        .toast.show {
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
 </head>
 <body>
-    <a href="product_store.html">Home</a>
-    <h1 >Create New Product</h1>
-    <div class="create">
-        <input type="text" placeholder="Product Name" class="inp">
-        <input type="text" placeholder="Price" class="inp">
-        <input type="text" placeholder="Image URL" class="inp">
-        <textarea placeholder="Description" class="inp desc"></textarea>
 
-        <button class="add">Add Product</button>
+<div class="page-header">
+    <a href="product_store.html" class="back-btn">← Back to Store</a>
+</div>
 
-    </div>
-    <div id="toast" class="toast">Product added successfully!</div>
-    
+<h1>Create New Product</h1>
+
+<div class="create-card">
+    <input type="text" placeholder="Product Name" class="inp">
+    <input type="text" placeholder="Price (e.g. 29.99)" class="inp">
+    <input type="text" placeholder="Image URL" class="inp">
+    <textarea placeholder="Description (optional)" class="inp desc"></textarea>
+    <button class="add">+ Add Product</button>
+</div>
+
+<div id="toast" class="toast">Product added successfully!</div>
+
 <script>
     const addBtn = document.querySelector('.add');
-    // Load existing products or initialize empty array
     const products = JSON.parse(localStorage.getItem('products')) || [];
-    
-    function showToast(message) {
-  const toast = document.getElementById('toast');
-  toast.textContent = message;
-  toast.classList.add('show');
 
-  setTimeout(() => {
-    toast.classList.remove('show');
-  }, 3000); // 3 seconds
-}
+    function showToast(message) {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 3000);
+    }
 
     addBtn.addEventListener('click', () => {
-    const inputs = document.querySelectorAll('.inp');
-    const product = {
-    name: inputs[0].value.trim(),
-    price: inputs[1].value.trim(),
-    image: inputs[2].value.trim(),
-    info: document.querySelector('.desc').value.trim()
-    };
-    products.push(product)
-    localStorage.setItem('products', JSON.stringify(products));
-    showToast('Product added successfully!');
+        const inputs = document.querySelectorAll('.inp');
+        const name  = inputs[0].value.trim();
+        const price = inputs[1].value.trim();
+        const image = inputs[2].value.trim();
+        const info  = document.querySelector('.desc').value.trim();
+
+        if (!name || !price) {
+            showToast('Please fill in at least a name and price.');
+            return;
+        }
+
+        products.push({ name, price, image, info });
+        localStorage.setItem('products', JSON.stringify(products));
+
+        inputs.forEach(i => i.value = '');
+        showToast('Product added successfully!');
     });
-
-
 </script>
 
 </body>
